@@ -86,9 +86,9 @@ function TaskForm() {
           value={formData.state}
           onChange={handleChange}
         >
-          <option value="À faire">À faire</option>
-          <option value="En cours">En cours</option>
-          <option value="Terminée">Terminée</option>
+          <option value="Todo">Todo</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Done">Done</option>
         </select>
       </label>
       <br />
