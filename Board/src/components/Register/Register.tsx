@@ -1,6 +1,38 @@
 import { useState } from 'react';
 import './styles.css';  // Import the CSS file
 
+const handleRegistration = async ({ name, email, password }) => {
+    const registrationData = {
+        "data": {
+            "nom": name,
+            "email": email,
+            "password": password,
+        }
+    };
+
+    try {
+        const response = await fetch('http://10.31.34.17:1337/api/utilisateurs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(registrationData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Registration successful:', data);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            console.error('Error registering:', error.message);
+        }
+    }
+};
+
+
 const Register: React.FC = () => {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -20,7 +52,7 @@ const Register: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Form submitted:', { name, email, password });
+        handleRegistration({ name, email, password });
     };
 
     return (
