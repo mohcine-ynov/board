@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import TaskCard from '../TaskCard/TaskCard';
 
 function TaskForm() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function TaskForm() {
     priority: 'Basse',
     state: 'À faire',
   });
+
+  const [taskData, setTaskData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +22,7 @@ function TaskForm() {
 
   const handleSubmit = () => {
     // Construire un objet avec les mêmes clés que dans l'exemple de Postman
-    const taskData = {
+    const newTaskData = {
       data: {
         title: formData.title,
         description: formData.description,
@@ -29,7 +32,7 @@ function TaskForm() {
     };
 
     // Effectuer la requête POST vers l'API en utilisant Axios
-    axios.post('http://10.31.34.17:1337/api/tasks', taskData, {
+    axios.post('http://10.31.34.17:1337/api/tasks', newTaskData, {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -43,60 +46,59 @@ function TaskForm() {
   };
 
   return (
-    <form>
-      <label>
-        Titre:
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
+    <div>
+      <form>
+        <label>
+          Titre:
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
 
-      <label>
-        Description:
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
 
-      <label>
-        Priorité:
-        <select
-          name="priority"
-          value={formData.priority}
-          onChange={handleChange}
-        >
-          <option value="Basse">Basse</option>
-          <option value="Moyenne">Moyenne</option>
-          <option value="Haute">Haute</option>
-        </select>
-      </label>
-      <br />
+        <label>
+          Priorité:
+          <select
+            name="priority"
+            value={formData.priority}
+            onChange={handleChange}
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </label>
+        <br />
 
-      <label>
-        État:
-        <select
-          name="state"
-          value={formData.state}
-          onChange={handleChange}
-        >
-          <option value="Todo">Todo</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Done">Done</option>
-        </select>
-      </label>
-      <br />
+        <label>
+          État:
+          <select name="state" value={formData.state} onChange={handleChange}>
+            <option value="Todo">Todo</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </label>
+        <br />
 
-      <button type="button" onClick={handleSubmit}>
-        Sauvegarder
-      </button>
-    </form>
+        <button type="button" onClick={handleSubmit}>
+          Sauvegarder
+        </button>
+      </form>
+      {taskData && <TaskCard taskData={taskData} />}
+    </div>
   );
 }
 
