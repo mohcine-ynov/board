@@ -7,7 +7,7 @@ function TaskForm() {
     title: '',
     description: '',
     priority: 'Basse',
-    state: 'À faire',
+    state: 'Todo',
   });
 
   const [taskData, setTaskData] = useState(null);
@@ -37,12 +37,12 @@ function TaskForm() {
         'Content-Type': 'application/json',
       }
     })
-    .then((response) => {
-      console.log('Tâche créée avec succès', response.data);
-    })
-    .catch((error) => {
-      console.error('Erreur lors de la création de la tâche', error);
-    });
+      .then((response) => {
+        console.log('Tâche créée avec succès', response.data);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la création de la tâche', error);
+      });
   };
 
   return (
