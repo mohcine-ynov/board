@@ -25,6 +25,10 @@ const handleRegistration = async ({ name, email, password }) => {
 
         const data = await response.json();
         console.log('Registration successful:', data);
+
+        // Redirect to the login page
+        window.location.href = '/login';
+
     } catch (error: unknown) {
         if (error instanceof Error) {
             console.error('Error registering:', error.message);
@@ -53,9 +57,6 @@ const Register: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         handleRegistration({ name, email, password });
-
-        // Redirect to the login page
-        window.location.href = '/login';
     };
 
     return (
