@@ -53,6 +53,9 @@ const Register: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         handleRegistration({ name, email, password });
+
+        // Redirect to the login page
+        window.location.href = '/login';
     };
 
     return (
