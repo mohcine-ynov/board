@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskCard from '../TaskCard/TaskCard';
 import TaskForm from '../taskForm/TaskForm';
+import './styles.css';  // Import the CSS file
 
 function TaskList() {
   const [todo, setTodo] = useState([]);
@@ -83,36 +84,45 @@ function TaskList() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <TaskForm onTaskCreate={handleTaskCreate} />
 
       <h1>Liste des Tâches</h1>
-      <h1>A faire</h1>
-      {todo.map((task) => (
-        <TaskCard
-          key={task.id}
-          taskData={task}
-          updateTaskState={updateTaskState}
-        />
-      ))}
-      <h1>En cours</h1>
-      {inprogress.map((task) => (
-        <TaskCard
-          key={task.id}
-          taskData={task}
-          updateTaskState={updateTaskState}
-        />
-      ))}
-      <h1>Terminé</h1>
-      {done.map((task) => (
-        <TaskCard
-          key={task.id}
-          taskData={task}
-          updateTaskState={updateTaskState}
-          deleteTask={deleteTask}
-        />
-      ))}
-    </div>
+
+      <div className='tasks'>
+        <div>
+          <h1>A faire</h1>
+          {todo.map((task) => (
+            <TaskCard
+              key={task.id}
+              taskData={task}
+              updateTaskState={updateTaskState}
+            />
+          ))}
+        </div>
+        <div>
+          <h1>En cours</h1>
+          {inprogress.map((task) => (
+            <TaskCard
+              key={task.id}
+              taskData={task}
+              updateTaskState={updateTaskState}
+            />
+          ))}
+        </div>
+        <div>
+          <h1>Terminé</h1>
+          {done.map((task) => (
+            <TaskCard
+              key={task.id}
+              taskData={task}
+              updateTaskState={updateTaskState}
+              deleteTask={deleteTask}
+            />
+          ))}
+        </div>
+      </div>
+    </React.Fragment>
 
   );
 }

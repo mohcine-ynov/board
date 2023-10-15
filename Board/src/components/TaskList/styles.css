@@ -1,0 +1,16 @@
+.tasks {
+    display: flex;
+    flex-direction: row;
+}
+
+.tasks>div {
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    min-height: 40px;
+    min-width: 31%;
+    border-radius: 40px;
+    background-color: #fafafa;
+    box-shadow: 3px 0px 20px rgb(0 0 0 / 15%);
+    border: 1px solid #dfdfdf;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './styles.css';  // Import the CSS file
 
 function TaskCard({ taskData, updateTaskState, deleteTask }) {
   const handleStateChange = (newState) => {
@@ -18,12 +19,16 @@ function TaskCard({ taskData, updateTaskState, deleteTask }) {
 
   return (
     <div className="task-card">
-      <h3>{taskData.attributes.title}</h3>
-      <p>État : {taskData.attributes.state}</p>
-      <button onClick={() => handleStateChange('Done')}>Terminée</button>
-      <button onClick={() => handleStateChange('In Progress')}>En cours</button>
-      <button onClick={() => handleStateChange('Todo')}>A faire</button>
-      <button onClick={handleDelete}>Supprimer</button>
+      <div className='title'>
+        <h3>{taskData.attributes.title}</h3>
+      </div>
+      <div className='buttons'>
+        <button onClick={() => handleStateChange('Todo')} id="todo">A faire</button>
+        <button onClick={() => handleStateChange('In Progress')} id="inprogress">En cours</button>
+        <button onClick={() => handleStateChange('Done')} id="done">Terminée</button>
+        <button onClick={handleDelete} id="delete">Supprimer</button>
+      </div>
+
     </div>
   );
 }
