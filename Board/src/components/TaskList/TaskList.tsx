@@ -7,7 +7,7 @@ function TaskList() {
 
   useEffect(() => {
     // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://10.31.34.17:1337/api/tasks')
+    axios.get('http://localhost:1337/api/tasks')
       .then((response) => {
         setTasks(response.data.data);
       })
@@ -18,7 +18,7 @@ function TaskList() {
 
   const updateTaskState = (taskId, newState) => {
     // Effectuer la requête PUT pour mettre à jour l'état de la tâche
-    axios.put(`http://10.31.34.17:1337/api/tasks/${taskId}`, {
+    axios.put(`http://localhost:1337/api/tasks/${taskId}`, {
       data: {
         state: newState,
       }
