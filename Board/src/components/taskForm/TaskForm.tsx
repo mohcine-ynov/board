@@ -97,7 +97,7 @@ function TaskForm() {
           Sauvegarder
         </button>
       </form>
-      {taskData && <TaskCard taskData={taskData} />}
+      {taskData && <TaskCard taskData={taskData} updateTaskState={undefined} />}
     </div>
   );
 }
