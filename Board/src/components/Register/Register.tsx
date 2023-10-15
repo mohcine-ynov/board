@@ -11,7 +11,7 @@ const handleRegistration = async ({ name, email, password }) => {
     };
 
     try {
-        const response = await fetch('http://10.31.34.17:1337/api/utilisateurs', {
+        const response = await fetch('http://localhost:1337/api/utilisateurs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

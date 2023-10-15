@@ -8,7 +8,7 @@ async function authenticateUser(username, password) {
 
     try {
         console.log('Fetching data...');
-        const response = await axios.get('http://10.31.34.17:1337/api/utilisateurs');
+        const response = await axios.get('http://localhost:1337/api/utilisateurs');
         // Process the response.data or perform actions after the GET request is complete
         console.log('Data:', response.data);
         users = response.data.data;
