@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskCard from '../TaskCard/TaskCard';
+import TaskForm from '../taskForm/TaskForm';
 
 function TaskList() {
   const [todo, setTodo] = useState([]);
@@ -9,14 +10,6 @@ function TaskList() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Todo')
-      .then((response) => {
-        setTodo(response.data.data);
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la récupération des tâches', error);
-      });
     axios.get('http://localhost:1337/api/tasks')
       .then((response) => {
         setTasks(response.data.data);
@@ -26,27 +19,39 @@ function TaskList() {
       });
   }, []);
 
+
   useEffect(() => {
     // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=In Progress')
+    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Todo&sort=id:desc')
+      .then((response) => {
+        setTodo(response.data.data);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la récupération des tâches', error);
+      });
+  }, [tasks]);
+
+  useEffect(() => {
+    // Effectuer la requête GET pour récupérer toutes les tâches
+    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=In Progress&sort=id:desc')
       .then((response) => {
         setInprogress(response.data.data);
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des tâches', error);
       });
-  }, []);
+  }, [tasks]);
 
   useEffect(() => {
     // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Done')
+    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Done&sort=id:desc')
       .then((response) => {
         setDone(response.data.data);
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des tâches', error);
       });
-  }, []);
+  }, [tasks]);
 
   const updateTaskState = async (taskId, newState) => {
     try {
@@ -72,8 +77,15 @@ function TaskList() {
     setTasks(updatedTasks);
   };
 
+  const handleTaskCreate = (newTaskData) => {
+    console.log("Task created  : ", newTaskData);
+    setTasks([...tasks]);
+  };
+
   return (
     <div>
+      <TaskForm onTaskCreate={handleTaskCreate} />
+
       <h1>Liste des Tâches</h1>
       <h1>A faire</h1>
       {todo.map((task) => (

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import TaskCard from '../TaskCard/TaskCard';
 
-function TaskForm() {
+function TaskForm({ onTaskCreate }) {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -43,6 +43,9 @@ function TaskForm() {
       .catch((error) => {
         console.error('Erreur lors de la création de la tâche', error);
       });
+
+    const onTaskCreateData = "task created";
+    onTaskCreate(onTaskCreateData);
   };
 
   return (
