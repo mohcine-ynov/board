@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
+import axios from 'axios';
 
-function TaskCard({ taskData, updateTaskState }) {
-  const [newState, setNewState] = useState(taskData.state);
-
-  const handleStateChange = () => {
-    // Appel de la fonction de mise à jour de l'état (updateTaskState) avec les nouvelles données
+function TaskCard({ taskData, updateTaskState, deleteTask }) {
+  const handleStateChange = (newState) => {
     updateTaskState(taskData.id, newState);
+  };
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:1337/api/tasks/${taskData.id}`)
+      .then(() => {
+        deleteTask(taskData.id);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la suppression de la tâche', error);
+      });
   };
 
   return (
     <div className="task-card">
-      <h2>{taskData.title}</h2>
-      <p>Description : {taskData.attributes.description}</p>
-      <p>Priorité : {taskData.attributes.priority}</p>
-      <p>État : {taskData.attributes.state}</p>     
-      <select value={newState} onChange={(e) => setNewState(e.target.value)}>
-        <option value="À faire">À faire</option>
-        <option value="En cours">En cours</option>
-        <option value="Terminée">Terminée</option>
-      </select>
-      <button onClick={handleStateChange}>Modifier État</button>
+      <h3>{taskData.attributes.title}</h3>
+      <p>État : {taskData.attributes.state}</p>
+      <button onClick={() => handleStateChange('Terminée')}>Terminée</button>
+      <button onClick={() => handleStateChange('En cours')}>En cours</button>
+      <button onClick={() => handleStateChange('A faire')}>A faire</button>
+      <button onClick={handleDelete}>Supprimer</button>
     </div>
   );
 }
