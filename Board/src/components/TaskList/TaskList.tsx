@@ -23,7 +23,7 @@ function TaskList() {
 
   useEffect(() => {
     // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Todo&sort=id:desc')
+    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Todo&sort=updatedAt:desc')
       .then((response) => {
         setTodo(response.data.data);
       })
@@ -34,7 +34,7 @@ function TaskList() {
 
   useEffect(() => {
     // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=In Progress&sort=id:desc')
+    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=In Progress&sort=updatedAt:desc')
       .then((response) => {
         setInprogress(response.data.data);
       })
@@ -45,7 +45,7 @@ function TaskList() {
 
   useEffect(() => {
     // Effectuer la requête GET pour récupérer toutes les tâches
-    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Done&sort=id:desc')
+    axios.get('http://localhost:1337/api/tasks?filters[state][$eq]=Done&sort=updatedAt:desc')
       .then((response) => {
         setDone(response.data.data);
       })
