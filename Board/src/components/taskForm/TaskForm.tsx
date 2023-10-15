@@ -32,7 +32,7 @@ function TaskForm() {
     };
 
     // Effectuer la requête POST vers l'API en utilisant Axios
-    axios.post('http://10.31.34.17:1337/api/tasks', newTaskData, {
+    axios.post('http://localhost:1337/api/tasks', newTaskData, {
       headers: {
         'Content-Type': 'application/json',
       }
