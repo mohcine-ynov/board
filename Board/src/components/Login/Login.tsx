@@ -53,7 +53,8 @@ const Login: React.FC = () => {
             if (authenticationResult.success) {
                 // Successful login - handle login logic (e.g., store authentication token)
                 console.log('Login successful:', authenticationResult.user);
-                setError('Success!');
+                // Redirect to the tasks page
+                window.location.href = '/tasks-list';
             } else {
                 // Failed login
                 setError(authenticationResult.message);
