@@ -74,8 +74,10 @@ function TaskList() {
   };
 
   const deleteTask = (taskId) => {
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(updatedTasks);
+    // const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    // setTasks(updatedTasks);
+    console.log("Task deleted");
+    setTasks([...tasks]);
   };
 
   const handleTaskCreate = (newTaskData) => {
@@ -97,6 +99,7 @@ function TaskList() {
               key={task.id}
               taskData={task}
               updateTaskState={updateTaskState}
+              deleteTask={deleteTask}
             />
           ))}
         </div>
@@ -107,6 +110,7 @@ function TaskList() {
               key={task.id}
               taskData={task}
               updateTaskState={updateTaskState}
+              deleteTask={deleteTask}
             />
           ))}
         </div>

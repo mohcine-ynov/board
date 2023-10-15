@@ -3,6 +3,7 @@ import axios from 'axios';
 import './styles.css';  // Import the CSS file
 
 function TaskCard({ taskData, updateTaskState, deleteTask }) {
+
   const handleStateChange = (newState) => {
     updateTaskState(taskData.id, newState);
   };
