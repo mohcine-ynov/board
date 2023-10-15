@@ -22,6 +22,7 @@ function TaskCard({ taskData, updateTaskState, deleteTask }) {
     <div className="task-card">
       <div className='title'>
         <h3>{taskData.attributes.title}</h3>
+        <p>{taskData.attributes.priority}</p>
       </div>
       <div className='buttons'>
         <button onClick={() => handleStateChange('Todo')} id="todo">A faire</button>

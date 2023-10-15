@@ -15,6 +15,10 @@
 
 .title {
     min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .buttons {
@@ -43,4 +47,13 @@
 
 #todo {
     background-color: rgb(201, 201, 1);
+}
+
+.title>p {
+    background-color: rgb(187, 187, 187);
+    color: white;
+    width: fit-content;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px 10px;
 }
